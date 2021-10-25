@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Match</title>
+  <link rel="stylesheet" type="text/css" href="../static/styles.css">
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.11/paper-full.min.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="container">
+            <header class="nav">
+                <!-- <h2>Art Match</h2> -->
+                <div class="tools__tab">
+                    <button class="tablinks" onclick="changeInput('draw', this)" id="defaultOpen">Draw</button>
+                    <button class="tablinks" onclick="changeInput('upload', this)">Upload Image</button>
+                </div>
+            </header>
+
+            <section class="results">
+                <div class="query">
+                    <div class="object_query"></div>
+                    <div class="results_tools"></div>
+                </div>
+
+                <div class="matches">
+                    <div id="ch_all" sclass="matches_museum">
+                        <div class="object_match"></div>
+                        <div class="object_match"></div>
+                        <div class="object_match"></div>
+                    </div>
+
+                    <div id="met_all" class="matches_museum">
+                        <div class="object_match"></div>
+                        <div class="object_match"></div>
+                        <div class="object_match"></div>
+                    </div>
+
+                    <div id="sm_all" class="matches_museum">
+                        <div class="object_match"></div>
+                        <div class="object_match"></div>
+                        <div class="object_match"></div>
+                    </div>
+                </div>           
+            </section>
+
+            
+
+
+        </div>
+
+            
+    </div>
+
+</body>
+<script src="../static/main.js"></script>
+
+
+      
+
+
+
+</script>  
+
+
+</html>
+
+
