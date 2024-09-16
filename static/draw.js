@@ -97,6 +97,10 @@ function stop(event) {
     console.log(restore_array);
 }
 
+function touchstart(event) { start(event.touches[0]) }
+function touchdraw(event) { draw(event.touches[0]); event.preventDefault(); }
+function touchend(event) { stop(event.changedTouches[0]) }
+
 function clear_canvas() {
     context.fillStyle = start_bg_color;
     context.clearRect(0, 0, canvas.width, canvas.height);
