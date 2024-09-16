@@ -220,7 +220,7 @@ $('#doodle_predict').click(function () {
     redirect: 'follow'
   };
 
-  fetch("http://127.0.0.1:5000/museum-retriever", requestOptions)
+  fetch("http://80.85.87.85:8000/museum-retriever", requestOptions)
   .then(function (response) {
     if (response.ok) {
       return response.json();
