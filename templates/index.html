@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sketchy Collections</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500&family=Noto+Sans&family=Poppins&family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/styles.css">
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>    
+  
+  <!-- <link rel="stylesheet" type="text/css" href="jquery.pagepiling.css"/>
+  <script type="text/javascript" src="jquery.pagepiling.js"></script> -->
+</head>
+<body>
+    <!-- QUERY -->
+    <div class="container">
+        <div class="input-column">
+            <div class="header">
+                <div class="app-title">Sketchy<br>Collections</div>
+            </div>
+            <!-- Option: Draw -->
+            <div id="draw-input" class="tabcontent">
+                <canvas id="canvas"></canvas>
+            </div>
+            <!-- Option: Upload -->
+            <div id="upload-input" class="tabcontent">
+                <div class="upload-img">
+                    <div class="img-placeholder-wrapper">
+                        <div class="img-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tools -->
+            <div class="tool-wrapper">
+                <div class="tool-box"  id="draw-tools">
+                    <div class="toolbar-wrapper">
+                            <div class="toolbar">
+                                <button id="undo" onClick="undo_last()" type="button" class="button">Undo</button>
+                                <button id="clear" onClick="clear_canvas()" type="button" class="button">Clear</button>
+                                <button id="doodle_predict" type="button" class="button">Predict</button>
+                            </div>
+                    </div>
+                </div>
+                <div class="tool-box" id="upload-tools">
+                    <div class="toolbar-wrapper">
+                        <div class="toolbar">
+                            <label class="custom-file-upload">
+                                <input type='file' id="file_upload" onchange='previewFile()'>
+                                Browse...
+                            </label>
+                            <button id="image_predict" type="button" class="button">Predict</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-options">
+                    <button class="tablinks" onclick="changeInput('draw-input', 'draw-tools', 'tab_draw', 'tab_upload')" hidden id="tab_draw">Draw</button>
+                    <button class="tablinks" onclick="changeInput('upload-input', 'upload-tools', 'tab_upload', 'tab_draw')" hidden id="tab_upload">Upload</button>
+                </div>
+            </div>
+        </div>
+    <!-- COOPER -->
+        <div class="museum-column">
+            <div class="header">
+                <div class="museum-title">Cooper Hewitt</div>
+            </div>
+            <div class="img-box">
+                <div id="cooper_lazy" class="lazyload">
+                    <div class="spinner-1"></div> 
+                </div>
+              <div id="cooper_img_1" class="match-img">
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="tags_wrapper">
+                    <div id="cooper_query_title" class="query-title">
+                        
+                    </div>
+                    <div></div>
+                    <div id="cooper_img_title" class="img-title"></div>
+
+                    <div id="cooper_query_tag_body_1" class="tag"></div>
+                    <div id="cooper_query_tag_pred_1" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_1" class="tag"></div>
+                    <div id="cooper_match_tag_pred_1" class="tag"></div>
+
+                    <div id="cooper_query_tag_body_2" class="tag"></div>
+                    <div id="cooper_query_tag_pred_2" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_2" class="tag"></div>
+                    <div id="cooper_match_tag_pred_2" class="tag"></div>
+
+                    <div id="cooper_query_tag_body_3" class="tag"></div>
+                    <div id="cooper_query_tag_pred_3" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_3" class="tag"></div>
+                    <div id="cooper_match_tag_pred_3" class="tag"></div>
+
+                    <div id="cooper_query_tag_body_4" class="tag"></div>
+                    <div id="cooper_query_tag_pred_4" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_4" class="tag"></div>
+                    <div id="cooper_match_tag_pred_4" class="tag"></div>
+
+                    <div id="cooper_query_tag_body_5" class="tag"></div>
+                    <div id="cooper_query_tag_pred_5" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_5" class="tag"></div>
+                    <div id="cooper_match_tag_pred_5" class="tag"></div>
+                </div>
+            </div>
+        </div>
+    <!-- MET -->
+        <div class="museum-column">
+            <div class="header">
+                <div class="museum-title">The Met</div>
+            </div>
+            <div class="img-box">
+                <div id="met_lazy" class="lazyload">
+                    <div class="spinner-1"></div> 
+                </div>
+                <div id="met_img_1" class="match-img">
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="tags_wrapper">
+                    <div id="met_query_title" class="query-title"></div>
+                    <div></div>
+                    <div id="met_img_title" class="img-title"></div>
+
+                    <div id="met_query_tag_body_1" class="tag"></div>
+                    <div id="met_query_tag_pred_1" class="tag"></div>
+                    <div></div>
+                    <div id="met_match_tag_body_1" class="tag"></div>
+                    <div id="met_match_tag_pred_1" class="tag"></div>
+
+                    <div id="met_query_tag_body_2" class="tag"></div>
+                    <div id="met_query_tag_pred_2" class="tag"></div>
+                    <div></div>
+                    <div id="met_match_tag_body_2" class="tag"></div>
+                    <div id="met_match_tag_pred_2" class="tag"></div>
+
+                    <div id="met_query_tag_body_3" class="tag"></div>
+                    <div id="met_query_tag_pred_3" class="tag"></div>
+                    <div></div>
+                    <div id="met_match_tag_body_3" class="tag"></div>
+                    <div id="met_match_tag_pred_3" class="tag"></div>
+
+                    <div id="met_query_tag_body_4" class="tag"></div>
+                    <div id="met_query_tag_pred_4" class="tag"></div>
+                    <div></div>
+                    <div id="met_match_tag_body_4" class="tag"></div>
+                    <div id="met_match_tag_pred_4" class="tag"></div>
+
+                    <div id="met_query_tag_body_5" class="tag"></div>
+                    <div id="met_query_tag_pred_5" class="tag"></div>
+                    <div></div>
+                    <div id="met_match_tag_body_5" class="tag"></div>
+                    <div id="met_match_tag_pred_5" class="tag"></div>
+                </div>
+            </div>
+        </div>
+    <!-- SCIENCE MUSEUM -->
+        <div class="museum-column">
+            <div class="header">
+                <div class="museum-title">Science Museum</div>
+            </div>
+            <div class="img-box">
+                <div id="smg_lazy" class="lazyload">
+                    <div class="spinner-1"></div> 
+                </div>
+                <div id="smg_img_1" class="match-img">
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="tags_wrapper">
+                    <div id="smg_query_title" class="query-title"></div>
+                    <div></div>
+                    <div id="smg_img_title" class="img-title"></div>
+
+                    <div id="smg_query_tag_body_1" class="tag"></div>
+                    <div id="smg_query_tag_pred_1" class="tag"></div>
+                    <div></div>
+                    <div id="smg_match_tag_body_1" class="tag"></div>
+                    <div id="smg_match_tag_pred_1" class="tag"></div>
+
+                    <div id="smg_query_tag_body_2" class="tag"></div>
+                    <div id="smg_query_tag_pred_2" class="tag"></div>
+                    <div></div>
+                    <div id="smg_match_tag_body_2" class="tag"></div>
+                    <div id="smg_match_tag_pred_2" class="tag"></div>
+
+                    <div id="smg_query_tag_body_3" class="tag"></div>
+                    <div id="smg_query_tag_pred_3" class="tag"></div>
+                    <div></div>
+                    <div id="smg_match_tag_body_3" class="tag"></div>
+                    <div id="smg_match_tag_pred_3" class="tag"></div>
+
+                    <div id="smg_query_tag_body_4" class="tag"></div>
+                    <div id="smg_query_tag_pred_4" class="tag"></div>
+                    <div></div>
+                    <div id="smg_match_tag_body_4" class="tag"></div>
+                    <div id="smg_match_tag_pred_4" class="tag"></div>
+
+                    <div id="smg_query_tag_body_5" class="tag"></div>
+                    <div id="smg_query_tag_pred_5" class="tag"></div>
+                    <div></div>
+                    <div id="smg_match_tag_body_5" class="tag"></div>
+                    <div id="smg_match_tag_pred_5" class="tag"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../static/main.js"></script>
+<script src="../static/draw.js"></script>
+<script src="../static/predict.js"></script>
+</html>
