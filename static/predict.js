@@ -217,7 +217,8 @@ $('#doodle_predict').click(function () {
     method: 'POST',
     headers: myHeaders,
     body: raw,
-    redirect: 'follow'
+    redirect: 'follow',
+    cors: 'no-cors'
   };
 
   fetch("http://127.0.0.1:5000/museum-retriever", requestOptions)
