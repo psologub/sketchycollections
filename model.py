@@ -137,14 +137,13 @@ def get_matches(image, museum_data=museum_data, tate_image_links=tate_image_link
         #not normalised for display
         query_tag_softmax = (100.0 * query_img_feature @ text_features.T).softmax(dim=-1)
         #normalise for to calculate matches (step one done again to not alter the previous variable)
-        # query_tag_feature = (100.0 * query_img_feature @ text_features.T).softmax(dim=-1)
-        # query_tag_feature /= query_tag_feature.norm(dim=-1, keepdim=True)
+        query_tag_feature = (100.0 * query_img_feature @ text_features.T).softmax(dim=-1)
+        query_tag_feature /= query_tag_feature.norm(dim=-1, keepdim=True)
         
         #Get cosine similarity scores
-        # similarities = (tag_features @ query_tag_feature.T).squeeze(1)
-        similarities = (tag_softmax @ query_tag_softmax.T).squeeze(1)
+        similarities = (tag_features @ query_tag_feature.T).squeeze(1)
+        # similarities = (tag_softmax @ query_tag_softmax.T).squeeze(1)
 
-        
         #Sort photos by similarity scores (top n -> e.g. top n to account for errors)
         best_idx = (-similarities).argsort()[:results_count]
         
