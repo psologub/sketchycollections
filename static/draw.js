@@ -55,8 +55,14 @@ function start(event) {
     //tells canvas to prepare to do something
     context.beginPath();
     //get coordinates (what about canvas.offset?)
-    context.moveTo(event.clientX - canvas.offsetLeft, 
-                    event.clientY - canvas.offsetTop);
+    if (event.type === 'mousedown') {
+        context.moveTo(event.clientX - canvas.offsetLeft, 
+            event.clientY - canvas.offsetTop);
+    } else {
+        context.moveTo(event.touches[0].clientX - canvas.offsetLeft, 
+            event.touches[0].clientY - canvas.offsetTop);
+    }
+    
     //let default changes disappear (?)
     event.preventDefault();
 }
@@ -65,8 +71,13 @@ function start(event) {
 function draw(event) {
     if ( is_drawing ) {
         //draw line to coordinates the mouse is moving to 
-        context.lineTo(event.clientX - canvas.offsetLeft, 
+        if (event.type === 'mousemove') {
+            context.lineTo(event.clientX - canvas.offsetLeft, 
                         event.clientY - canvas.offsetTop);
+        } else {
+            context.lineTo(event.touches[0].clientX - canvas.offsetLeft, 
+                event.touches[0].clientY - canvas.offsetTop);
+        }
         //line styles
         context.strokeStyle = draw_color;
         context.lineWidth = draw_width;
