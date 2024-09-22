@@ -30,7 +30,7 @@ class MuseumRetriever(Resource):
         query = args['query_img']
 
         match_data = model.get_matches(query, results_count=results_count)
-
+        
         return {'match_data': match_data}
 
 api.add_resource(MuseumRetriever, '/museum-retriever')

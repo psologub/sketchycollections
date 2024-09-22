@@ -34,12 +34,13 @@ function displayData(museum, image_url, object_link, title, targetTags, queryTag
 
   for (let i = 0; i < 5; i++) {
     x = i + 1
-    $(`div#${museum}_query_tag_body_${x}`).text(queryTags[i].split(": ")[0]);
-    $(`div#${museum}_query_tag_pred_${x}`).text(queryTags[i].split(": ")[1]);
+
+    $(`div#${museum}_query_tag_body_${x}`).text(Object.keys(queryTags)[i]);
+    $(`div#${museum}_query_tag_pred_${x}`).text(Object.values(queryTags)[i]);
     $(`div#${museum}_query_tag_pred_${x}`).css('text-align', 'right');
 
-    $(`div#${museum}_match_tag_body_${x}`).text(targetTags[i].split(": ")[0]);
-    $(`div#${museum}_match_tag_pred_${x}`).text(targetTags[i].split(": ")[1]);
+    $(`div#${museum}_match_tag_body_${x}`).text(Object.keys(targetTags)[i]);
+    $(`div#${museum}_match_tag_pred_${x}`).text(Object.values(targetTags)[i]);
     $(`div#${museum}_match_tag_pred_${x}`).css('text-align', 'right');
   } 
 }
@@ -106,10 +107,39 @@ function getDataCooper(data) {
   })
 }
 
-function getDataMet(data) {
+function getDataTate(data) {
   var museum = 'met';
   clearData(museum);
   document.getElementById("met_lazy").style.display = 'grid';
+  var image_url = data['image_url']
+  var title = data['title']
+  var object_link = data['artwork_page']
+  var queryTags = data['query_tags'];
+  var objectTags = data['top_tags'];
+  var objectID = data['top_id'];
+  var targetTags = objectTags.shift();
+  var targetID = objectID.shift();
+  var targetTitle = title.shift()
+  var targetObjectLink = object_link.shift()
+  var targetImageUrl = image_url.shift()
+
+   return loadImage(targetImageUrl)
+   .then(function(img) {
+     console.log(img);
+     document.getElementById("met_lazy").style.display = 'none';
+     displayData(museum, targetImageUrl, targetObjectLink, targetTitle, targetTags, queryTags);
+    })
+   .catch(function(err) {
+     console.log(err);
+     getDataTate(data);
+   })
+}
+
+
+function getDataMet(data) {
+  var museum = 'cooper';
+  clearData(museum);
+  document.getElementById("cooper_lazy").style.display = 'grid';
 
   
   var image_url;
@@ -139,7 +169,7 @@ function getDataMet(data) {
    return loadImage(image_url)
    .then(function(img) {
      console.log(img);
-     document.getElementById("met_lazy").style.display = 'none';
+     document.getElementById("cooper_lazy").style.display = 'none';
      displayData(museum, image_url, object_link, title, targetTags, queryTags);
     })
    .catch(function(err) {
@@ -182,7 +212,7 @@ function getDataSMG(data) {
   .then(response => response.json())
   .then(function (response) {
     data = response['data']['attributes']
-    console.log(data)
+    console.log(response)
     image_url = data['multimedia'][0]['@processed']['large']['location']
     title = data['title'][0]['value']
     object_link = url
@@ -197,8 +227,6 @@ function getDataSMG(data) {
      console.log(err);
      getDataSMG(data)
    })
-   
-   
   })
 }
 
@@ -220,7 +248,8 @@ $('#doodle_predict').click(function () {
     redirect: 'follow'
   };
 
-  fetch("http://80.85.87.85:8000/museum-retriever", requestOptions)
+  // fetch("http://80.85.87.85:8000/museum-retriever", requestOptions)
+  fetch("http://localhost:8000/museum-retriever", requestOptions)
   .then(function (response) {
     if (response.ok) {
       return response.json();
@@ -230,7 +259,7 @@ $('#doodle_predict').click(function () {
   }).then(async function (data) {
     //TODO get all data here when env sorted
     // var getDataAll = [getDataCooper(data['match_data']['cooper']), getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science'])] 
-    var getDataAll = [getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science'])]
+    var getDataAll = [getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science']), getDataTate(data['match_data']['tate'])]
     return Promise.all(getDataAll)
   }
   ).then(function (data) {
