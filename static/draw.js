@@ -2,10 +2,8 @@
 const canvas = document.getElementById("canvas");
 var canvas_wrapper = document.getElementById("canvas_wrapper");
 let context = canvas.getContext("2d");
-// canvas.style.width = 418 + "px";
-// canvas.style.height = 490 + "px";
-canvas.style.width = 320 + "px";
-canvas.style.height = 400 + "px";
+// canvas.style.width = 320 + "px";
+// canvas.style.height = 400 + "px";
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
 // Set actual size in memory (scaled to account for extra pixel density).
