@@ -8,10 +8,12 @@ let context = canvas.getContext("2d");
 // https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
 // Set actual size in memory (scaled to account for extra pixel density).
 var scale = window.devicePixelRatio; // Change to 1 on retina screens to see blurry canvas.
-// canvas.width = Math.floor(420 * scale);
-// canvas.height = Math.floor(500 * scale);
-canvas.width = Math.floor(320 * scale);
-canvas.height = Math.floor(400 * scale);
+// canvas.width = Math.floor(320 * scale);
+// canvas.height = Math.floor(400 * scale);
+var height = parseFloat(window.getComputedStyle(canvas, null)["height"].slice(0, -2))
+var width = parseFloat(window.getComputedStyle(canvas, null)["width"].slice(0, -2))
+canvas.width = Math.floor(width * scale);
+canvas.height = Math.floor(height * scale);
 
 // Normalize coordinate system to use css pixels.
 context.scale(scale, scale);
@@ -104,6 +106,7 @@ function stop(event) {
     index += 1;
     }   
     console.log(restore_array);
+    console.log(parseFloat(window.getComputedStyle(canvas, null)["width"].slice(0, -2)))
 }
 
 // function touchstart(event) { start(event.touches[0]) }

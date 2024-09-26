@@ -9,7 +9,6 @@ html {
     font-weight: 600;
     /* padding-bottom: 5px; */
     /* margin: 30px; */
-
 }
 
 .app-title {
@@ -61,7 +60,6 @@ a {
 }
 
 a:hover {
-    /* text-decoration: underline; */
     text-decoration-line: underline;
     text-decoration-thickness: 1.5px;
 }
@@ -71,7 +69,6 @@ a:hover {
     height: 100vh;
     grid-template-areas: "input-column museum-column museum-column museum-column";
     /* grid-template-columns: 420px 1fr 1fr 1fr; */
-    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 1fr;
 }
@@ -126,15 +123,22 @@ a:hover {
     /* border-bottom: 2px solid black; */
 }
 
+.canvas-wrapper {
+    height: 85%;
+    width: 85%;
+    margin: auto;
+    display: block;
+}
+
 canvas {
     cursor: pointer;
     /* border: 2px solid black; */
     /* margin: 42px 50px 50px 48px; */
     /* margin: 4.9% 5.8% 5.8% 5.6%; */
-    height: 85%;
-    width: 85%;
-    margin: auto;
-    display: block;
+    height: 100%;
+    width: 100%;
+    /* margin: auto;
+    display: block; */
 }
 
 .tool-box {
