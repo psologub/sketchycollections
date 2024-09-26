@@ -248,30 +248,39 @@ canvas {
     padding: 8%;
 }
 
+.tool-box {
+    height: 100%;
+    width: 100%;
+}
+
+
 .toolbar-wrapper {
     margin: auto;
     height: 100%;
     /* width: 320px; */
-    width: 21%;
+    width: 100%;
     /* padding-top: 8%; */
-    display:table-cell;
-    vertical-align:middle;
-    
+    /* display:table-cell;
+    vertical-align:middle; */   
 }
-
 
 .toolbar {
     /* margin: auto; */
+    width: 100%;
+    height: 100%;
     justify-self: center;
-    /* display: grid; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .button {
     align-self: center;
-    width: 100px;
-    height: 40px;
-    /* width:100%;
-    height: 100%; */
+    margin: auto;
+    display: block;
+    /* width: 100px;
+    height: 40px; */
+    width:94%;
+    height: 24%;
     border: 2px solid black;
     cursor: pointer;
     color: black;
@@ -279,6 +288,7 @@ canvas {
     font-weight: 700;
     font-size: 1.3em;
     border-radius: 20px;
+    /* border-radius: 35%/85%; */
 }
 
 /* #image_predict, #doodle_predict {
@@ -433,5 +443,9 @@ input[type="file"] {
 
     .material-icons {
         font-size: 100%;
+    }
+
+    .button {
+        font-size: 120%;
     }
   }
