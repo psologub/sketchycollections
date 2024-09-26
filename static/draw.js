@@ -18,8 +18,6 @@ canvas.height = Math.floor(height * scale);
 // Normalize coordinate system to use css pixels.
 context.scale(scale, scale);
 
-
-
 let start_bg_color = "#f3f2f2";
 // let start_bg_color = "white";
 context.fillStyle = start_bg_color;
@@ -44,10 +42,6 @@ canvas.addEventListener("mousemove", draw, false);
 canvas.addEventListener("touchend", stop, false);
 canvas.addEventListener("mouseup", stop, false);
 canvas.addEventListener("mouseout", stop, false);
-
-
-
-
 
 //prepare drawing (event gets mouse coordinates)
 function start(event) {
@@ -108,10 +102,6 @@ function stop(event) {
     console.log(restore_array);
     console.log(parseFloat(window.getComputedStyle(canvas, null)["width"].slice(0, -2)))
 }
-
-// function touchstart(event) { start(event.touches[0]) }
-// function touchdraw(event) { draw(event.touches[0]); event.preventDefault(); }
-// function touchend(event) { stop(event.changedTouches[0]) }
 
 function clear_canvas() {
     context.fillStyle = start_bg_color;
