@@ -24,7 +24,15 @@ context.fillStyle = start_bg_color;
 context.fillRect(0, 0, canvas.width, canvas.height);
 
 let draw_color = "black";
-let draw_width = "4";
+let draw_width
+var windowSize = window.matchMedia("(max-width: 1279px)")
+
+if (windowSize.matches) {
+    draw_width = "3";
+} else {
+    draw_width = "4"
+}
+
 let is_drawing = false;
 
 //save drawing paths in array for undo function
