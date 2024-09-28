@@ -27,7 +27,7 @@ body {
 }
 
 @supports (height: 100dvh) {
-    .body {
+    body {
       height: 100dvh;
     }
 }
