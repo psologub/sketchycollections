@@ -383,7 +383,7 @@ input[type="file"] {
     }
     
     .tag {
-        font-size: 100%;
+        font-size: 110%;
     }
 
     .query-title {
@@ -391,11 +391,11 @@ input[type="file"] {
     }
   
     .img-title {
-        font-size: 120%;
+        font-size: 130%;
     }
 
     .material-icons {
-        font-size: 100%;
+        font-size: 130%;
     }
 
     .button {
