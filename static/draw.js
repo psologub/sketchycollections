@@ -2,23 +2,21 @@
 const canvas = document.getElementById("canvas");
 var canvas_wrapper = document.getElementById("canvas_wrapper");
 let context = canvas.getContext("2d");
-// canvas.style.width = 418 + "px";
-// canvas.style.height = 490 + "px";
-canvas.style.width = 320 + "px";
-canvas.style.height = 400 + "px";
+// canvas.style.width = 320 + "px";
+// canvas.style.height = 400 + "px";
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
 // Set actual size in memory (scaled to account for extra pixel density).
 var scale = window.devicePixelRatio; // Change to 1 on retina screens to see blurry canvas.
-// canvas.width = Math.floor(420 * scale);
-// canvas.height = Math.floor(500 * scale);
-canvas.width = Math.floor(320 * scale);
-canvas.height = Math.floor(400 * scale);
+// canvas.width = Math.floor(320 * scale);
+// canvas.height = Math.floor(400 * scale);
+var height = parseFloat(window.getComputedStyle(canvas, null)["height"].slice(0, -2))
+var width = parseFloat(window.getComputedStyle(canvas, null)["width"].slice(0, -2))
+canvas.width = Math.floor(width * scale);
+canvas.height = Math.floor(height * scale);
 
 // Normalize coordinate system to use css pixels.
 context.scale(scale, scale);
-
-
 
 let start_bg_color = "#f3f2f2";
 // let start_bg_color = "white";
@@ -44,10 +42,6 @@ canvas.addEventListener("mousemove", draw, false);
 canvas.addEventListener("touchend", stop, false);
 canvas.addEventListener("mouseup", stop, false);
 canvas.addEventListener("mouseout", stop, false);
-
-
-
-
 
 //prepare drawing (event gets mouse coordinates)
 function start(event) {
@@ -106,11 +100,8 @@ function stop(event) {
     index += 1;
     }   
     console.log(restore_array);
+    console.log(parseFloat(window.getComputedStyle(canvas, null)["width"].slice(0, -2)))
 }
-
-// function touchstart(event) { start(event.touches[0]) }
-// function touchdraw(event) { draw(event.touches[0]); event.preventDefault(); }
-// function touchend(event) { stop(event.changedTouches[0]) }
 
 function clear_canvas() {
     context.fillStyle = start_bg_color;

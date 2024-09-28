@@ -9,7 +9,6 @@ html {
     font-weight: 600;
     /* padding-bottom: 5px; */
     /* margin: 30px; */
-
 }
 
 .app-title {
@@ -26,7 +25,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 @font-face {
@@ -42,8 +41,11 @@ src: url(zigzag-rounded.woff2);
 
 .tag {
     font-size: 1.3rem;
-    margin-bottom: 10px;
-    margin-right: 5px;
+    font-size: 130%;
+    /* margin-bottom: 10px; */
+    margin-bottom: 8%;
+    /* margin-right: 5px; */
+    margin-right: 6%;
 }
 
 *,
@@ -58,7 +60,6 @@ a {
 }
 
 a:hover {
-    /* text-decoration: underline; */
     text-decoration-line: underline;
     text-decoration-thickness: 1.5px;
 }
@@ -68,7 +69,7 @@ a:hover {
     height: 100vh;
     grid-template-areas: "input-column museum-column museum-column museum-column";
     /* grid-template-columns: 420px 1fr 1fr 1fr; */
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 1fr;
 }
 
@@ -90,9 +91,12 @@ a:hover {
     grid-template-areas: "header"
                          "tabcontent" 
                          "tool-box";
-    grid-template-columns: 1fr;
-    grid-template-rows: 120px 480px auto;
+    grid-template-columns: 100%;
+    grid-template-rows: 15% 55% 30%;
     /* border-right: 2px solid black; */
+    /* min-width: 25%;
+    max-width: 25%; */
+    /* width: 25% */
 }
 
 .museum-column {
@@ -100,34 +104,50 @@ a:hover {
     grid-template-areas: "header"
                          "img-box"
                          "info-box";
-    grid-template-columns: 1fr;
-    grid-template-rows: 120px 1fr auto;
+    grid-template-columns: 100%;
+    grid-template-rows: 15% 1fr auto;
     border-left: 2px solid black; 
     /* TODO find a better way to do this */
-    min-width: 360px 
+    /* min-width: 25%;
+    max-width: 25%; */
+    /* width: 25% */
 }
 
 
 .tabcontent {
     display: none;
-    min-height: 480px;
+    /* min-height: 480px; */
+    /* min-height: 100%;
+    min-width: 100%; */
+    /* max-width: 100%; */
+    height: 100%;
+    width: 100%;
     /* border-bottom: 2px solid black; */
+    display: grid;
 }
+
+.canvas-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* center horizontally */ 
+	align-items: center; /* center vertically */ 
+    }
 
 canvas {
     cursor: pointer;
-    /* border: 2px solid black; */
-    margin: 42px 50px 50px 48px;
+    height: 85%;
+    width: 85%;
 }
 
 .tool-box {
     display: none;
     margin: auto;
-    /* display: grid; */
 }
 
 .img-box {
-    max-height: 500px;
+    max-height: 100%;
+    /* max-height: 58%; */
     /* border-bottom: 2px solid black;  */
 }
 
@@ -162,15 +182,16 @@ canvas {
 .img-placeholder {
     display: block;
     background-color: #f3f2f2;
-    height: 400px;
-    width: 320px;
-    /* margin-top: 50px;
-    margin: auto; */
+    /* height: 400px;
+    width: 320px; */
+    /* TODO double check img upload */
+    height: 100%;
+    width: 100%; 
 }
 
  .info-box { 
     display: grid;
-    grid-template-rows: minmax(0, 1fr);
+    /* grid-template-rows: minmax(0, 1fr); */
     margin: 8%;
 }
 
@@ -183,8 +204,7 @@ canvas {
 .query-title {
     grid-row: 1;
     grid-column: 1 / 3;
-
-    font-size: 1.5rem;
+    font-size: 150%;
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 12%;
@@ -194,11 +214,11 @@ canvas {
 .img-title {
     grid-row: 1;
     grid-column: 4 / -1;
-
-    font-size: 1.5rem;
+    font-size: 150%;
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 12%;
+    word-break: break-word;
 }
 
 .tags-box-query {
@@ -210,43 +230,59 @@ canvas {
     padding: 10%;
 }
 
+/* TODO make responsive */
 .tablinks {
     cursor: pointer;
     color: black;
     background: white;
-    font-size: 2rem;
+    font-size: 200%;
     font-weight: 600;
     border: none;
     margin-left: 50px;
     margin-right: 50px;  
     align-self: start;
 
-}
+} 
 
 .tool-wrapper {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 0fr; 
     padding: 8%;
 }
+
+.tool-box {
+    height: 100%;
+    width: 100%;
+}
+
 
 .toolbar-wrapper {
     margin: auto;
     height: 100%;
-    width: 320px;
-    display: grid;
-    padding-top: 8%;
-    
+    /* width: 320px; */
+    width: 100%;
+    /* padding-top: 8%; */
+    /* display:table-cell;
+    vertical-align:middle; */   
 }
 
 .toolbar {
     /* margin: auto; */
+    width: 100%;
+    height: 100%;
     justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .button {
     align-self: center;
-    width: 100px;
-    height: 40px;
+    margin: auto;
+    display: block;
+    /* width: 100px;
+    height: 40px; */
+    width:94%;
+    height: 24%;
     border: 2px solid black;
     cursor: pointer;
     color: black;
@@ -254,7 +290,7 @@ canvas {
     font-weight: 700;
     font-size: 1.3em;
     border-radius: 20px;
-
+    /* border-radius: 35%/85%; */
 }
 
 /* #image_predict, #doodle_predict {
@@ -345,3 +381,73 @@ input[type="file"] {
   top: 2.2px;
 
 }
+
+
+/* iPads in portrait and landscape */
+/* @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait),
+       only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+        .tag {font-size: 100%;}
+    }    */
+
+/* 
+@media (min-width: 400px) {
+.tag { font-size: calc(0.01rem + 1vw) }
+} */
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 1280px) {
+    .app-title {
+        font-size: 300%
+    }
+
+    .museum-title {
+        font-size: 200%
+    }
+
+    .tag {
+        font-size: 130%
+    }
+
+    .query-title {
+        font-size: 150%
+    }
+
+    .img-title {
+        font-size: 150%
+    }
+
+    .material-icons {
+        font-size: 100%;
+    }
+  }
+  
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+  @media screen and (max-width: 1279px) {
+    .app-title {
+        font-size: 270%
+    }
+
+    .museum-title {
+        font-size: 170%
+    }
+    
+    .tag {
+        font-size: 100%;
+    }
+
+    .query-title {
+        font-size: 120%
+    }
+  
+    .img-title {
+        font-size: 120%;
+    }
+
+    .material-icons {
+        font-size: 100%;
+    }
+
+    .button {
+        font-size: 120%;
+    }
+  }
