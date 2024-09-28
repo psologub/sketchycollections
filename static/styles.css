@@ -68,7 +68,7 @@ a:hover {
 
 .container {
     display: grid;
-    height: 100vh;
+    height: 100%;
     grid-template-areas: "input-column museum-column museum-column museum-column";
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 1fr;
