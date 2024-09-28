@@ -103,7 +103,10 @@ function getDataCooper(data) {
      console.log(err);
      getDataCooper(data);
    })
-   
+  })
+  .catch(function(err) {
+    console.log(err);
+    getDataCooper(data);
   })
 }
 
@@ -176,7 +179,10 @@ function getDataMet(data) {
      console.log(err);
      getDataMet(data)
    })
-   
+  })
+  .catch(function(err) {
+    console.log(err);
+    getDataMet(data)
   })
 }
 
@@ -216,7 +222,6 @@ function getDataSMG(data) {
     image_url = data['multimedia'][0]['@processed']['large']['location']
     title = data['title'][0]['value']
     object_link = url
-    
 
    return loadImage(image_url)
    .then(function(img) {
@@ -227,6 +232,10 @@ function getDataSMG(data) {
      console.log(err);
      getDataSMG(data)
    })
+  })
+  .catch(function(err) {
+    console.log(err);
+    getDataSMG(data)
   })
 }
 
