@@ -26,6 +26,12 @@ body {
     height: 100vh;
 }
 
+@supports (height: 100dvh) {
+    .body {
+      height: 100dvh;
+    }
+}
+
 @font-face {
     font-family: Pilowlava-Regular;
     src: url(Pilowlava-Regular.woff2);
