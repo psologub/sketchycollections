@@ -15,6 +15,12 @@
 </head>
 <body>
     <!-- QUERY -->
+    <div class="popup-container">
+        <button class="popup-close-button" onClick="closePopup()"><i class="material-icons close">close</i></button>
+        <div class="popup-box">
+            <p class="about-body">Sketchy Collections is an AI-driven image search tool that makes it possible to explore three museum collections – The Met, Cooper Hewitt and Science Museum – through sketching and uploading pictures. My goal was to make a prototype for a web app that makes both cultural heritage and AI technology more visible to non-experts.</p>
+        </div>
+    </div>
     <div class="container">
         <div class="input-column">
             <div class="header">
@@ -56,9 +62,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="header-options">
+                <div class="tool-options">
                     <button class="tablinks" onclick="changeInput('draw-input', 'draw-tools', 'tab_draw', 'tab_upload')" hidden id="tab_draw">Draw</button>
                     <button class="tablinks" onclick="changeInput('upload-input', 'upload-tools', 'tab_upload', 'tab_draw')" hidden id="tab_upload">Upload</button>
+                    <button class="tablinks" onClick="showPopup()">About</button>
                 </div>
             </div>
         </div>
