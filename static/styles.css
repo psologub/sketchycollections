@@ -45,6 +45,10 @@ src: url(zigzag-rounded.woff2);
     margin-right: 6%;
 }
 
+.tag-body {
+    hyphens: auto;
+}
+
 *,
 *:before,
 *:after {
@@ -191,7 +195,7 @@ canvas {
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 12%;
-    word-break: break-word;
+    hyphens: auto;
 }
 
 .tags-box-query {
