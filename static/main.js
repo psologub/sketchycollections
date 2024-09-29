@@ -45,8 +45,24 @@
           reader.readAsDataURL(file);
       }
   }
+  
 
+  const popupContainer = document.querySelector('.popup-container')
 
+  function showPopup() {
+    popupContainer.style.display = 'block'
+  }
+
+  function closePopup() {
+    popupContainer.style.display = 'none'
+  }
+
+  // // When the user clicks anywhere outside of the modal, close it
+  // window.onclick = function(event) {
+  //   if (event.target != popupContainer) {
+  //     popupContainer.style.display = "none";
+  //   }
+  // }
 
 
   
