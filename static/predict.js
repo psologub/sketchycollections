@@ -257,7 +257,7 @@ $('#doodle_predict').click(function () {
     redirect: 'follow'
   };
 
-  fetch("http://80.85.87.85:8000/museum-retriever", requestOptions)
+  fetch("/museum-retriever", requestOptions)
   // fetch("http://localhost:8000/museum-retriever", requestOptions)
   .then(function (response) {
     if (response.ok) {
@@ -274,7 +274,6 @@ $('#doodle_predict').click(function () {
   ).then(function (data) {
       console.log('nice');
     }).catch(function (error) {
-      
       console.warn(error);
     }); 
 
