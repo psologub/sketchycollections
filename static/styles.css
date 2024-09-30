@@ -332,6 +332,23 @@ input[type="file"] {
     display: none;
 }
 
+.error-sign {
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-sign-wrapper {
+    text-align: center;
+}
+
+.error-message-wrapper {
+    padding: 10%;
+    text-align: center;
+}
+
 /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje*/
 .spinner-1 {
     width: 40px;
@@ -381,6 +398,13 @@ input[type="file"] {
 
 }
 
+.material-icons.error {
+    font-size: 600%;
+    margin: auto;
+    font-weight: normal;
+    justify-self: center;
+}
+
 @media screen and (min-width: 1280px) {
     .app-title {
         font-size: 300%
@@ -415,6 +439,10 @@ input[type="file"] {
     }
 
     .material-icons.close {
+        font-size: 130%;
+    }
+
+    p {
         font-size: 130%;
     }
   }
@@ -458,5 +486,9 @@ input[type="file"] {
 
     .button {
         font-size: 120%;
+    }
+
+    p {
+        font-size: 110%;
     }
   }

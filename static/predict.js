@@ -45,7 +45,10 @@ function displayData(museum, image_url, object_link, title, targetTags, queryTag
   } 
 }
 
+
 function clearData(museum) {
+  document.getElementById(`${museum}_error`).style.display = 'none';
+
   $(`#${museum}_img_1`).css('background-image', 'url("")');
   
   // $(`#${museum}_img_title`).text(title);
@@ -64,7 +67,7 @@ function clearData(museum) {
   } 
 }
 
-//http://www.javascriptkit.com/javatutors/javascriptpromises.shtml
+//TODO add error handling
 function getDataCooper(data) {
   var museum = 'cooper';
   clearData(museum);
@@ -120,22 +123,37 @@ function getDataTate(data) {
   var queryTags = data['query_tags'];
   var objectTags = data['top_tags'];
   var objectID = data['top_id'];
-  var targetTags = objectTags.shift();
-  var targetID = objectID.shift();
-  var targetTitle = title.shift()
-  var targetObjectLink = object_link.shift()
-  var targetImageUrl = image_url.shift()
 
-   return loadImage(targetImageUrl)
-   .then(function(img) {
-     console.log(img);
-     document.getElementById("met_lazy").style.display = 'none';
-     displayData(museum, targetImageUrl, targetObjectLink, targetTitle, targetTags, queryTags);
+  if (objectTags.length > 0) {
+    var targetTags = objectTags.shift();
+    var targetID = objectID.shift();
+    var targetTitle = title.shift()
+    var targetObjectLink = object_link.shift()
+    var targetImageUrl = image_url.shift()
+
+    var fallbackData = {
+      'image_url': data['image_url'].splice(0),
+      'title': data['title'].splice(0),
+      'query_tags': data['query_tags'],
+      'artwork_page': data['artwork_page'].splice(0),
+      'top_tags': data['top_tags'].slice(0),
+      'top_id': data['top_id'].slice(0)
+    }
+
+    return loadImage(targetImageUrl)
+    .then(function(img) {
+      console.log(img);
+      document.getElementById("met_lazy").style.display = 'none';
+      displayData(museum, targetImageUrl, targetObjectLink, targetTitle, targetTags, queryTags);
+      })
+    .catch(function(err) {
+      console.log(err);
+      getDataTate(fallbackData);
     })
-   .catch(function(err) {
-     console.log(err);
-     getDataTate(data);
-   })
+  } else {
+    document.getElementById("met_lazy").style.display = 'none'
+    document.getElementById("met_error").style.display = 'grid'; //TODO update all tags to reflect museum
+  }
 }
 
 
@@ -144,46 +162,58 @@ function getDataMet(data) {
   clearData(museum);
   document.getElementById("cooper_lazy").style.display = 'grid';
 
-  
   var image_url;
   var title;
   var object_link;
   var queryTags = data['query_tags'];
   var objectTags = data['top_tags'];
   var objectID = data['top_id'];
-  var targetTags = objectTags.shift();
-  var targetID = objectID.shift();
-  var endpoint = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
-  url = endpoint + String(targetID) 
 
-  var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-  
-  return fetch(url, requestOptions)
-  .then(response => response.json())
-  .then(function (response) {
-    image_url = response['primaryImage']
-    title = response['title']
-    object_link = response['objectURL']
+  if (objectTags.length > 0) {
+    var targetTags = objectTags.shift();
+    var targetID = objectID.shift();
+
+    var fallbackData = {
+      'query_tags': data['query_tags'],
+      'top_tags': data['top_tags'].slice(0),
+      'top_id': data['top_id'].slice(0)
+    }
+
+    var endpoint = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
+    url = endpoint + String(targetID) 
+
+    var requestOptions = {
+          method: 'GET',
+          redirect: 'follow'
+        };
+    
+    return fetch(url, requestOptions)
+    .then(response => response.json())
+    .then(function (response) {
+      image_url = response['primaryImage']
+      title = response['title']
+      object_link = response['objectURL']
 
 
-   return loadImage(image_url)
-   .then(function(img) {
-     console.log(img);
-     document.getElementById("cooper_lazy").style.display = 'none';
-     displayData(museum, image_url, object_link, title, targetTags, queryTags);
+    return loadImage(image_url)
+    .then(function(img) {
+      console.log(img);
+      document.getElementById("cooper_lazy").style.display = 'none';
+      displayData(museum, image_url, object_link, title, targetTags, queryTags);
+      })
+    .catch(function(err) {
+      console.log(err);
+      getDataMet(fallbackData)
     })
-   .catch(function(err) {
-     console.log(err);
-     getDataMet(data)
-   })
-  })
-  .catch(function(err) {
-    console.log(err);
-    getDataMet(data)
-  })
+    })
+    .catch(function(err) {
+      console.log(err);
+      getDataMet(fallbackData)
+    })
+  } else {
+    document.getElementById("cooper_lazy").style.display = 'none'
+    document.getElementById("cooper_error").style.display = 'grid';
+  }
 }
 
 
@@ -192,51 +222,62 @@ function getDataSMG(data) {
   clearData(museum);
   document.getElementById("smg_lazy").style.display = 'grid';
 
-
   var image_url;
   var title;
   var object_link;
   var queryTags = data['query_tags'];
   var objectTags = data['top_tags'];
   var objectID = data['top_id'];
-  var targetTags = objectTags.shift();
-  var targetID = objectID.shift();
-
-  var endpoint = "https://collection.sciencemuseumgroup.org.uk/objects/";
-  url = endpoint + String(targetID) 
-
-  var myHeaders = new Headers();
-  myHeaders.append("Accept", "application/json");
   
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };
-  
-  return fetch(url, requestOptions)
-  .then(response => response.json())
-  .then(function (response) {
-    data = response['data']['attributes']
-    console.log(response)
-    image_url = data['multimedia'][0]['@processed']['large']['location']
-    title = data['title'][0]['value']
-    object_link = url
+  if (objectTags.length > 0) {
+    var targetTags = objectTags.shift();
+    var targetID = objectID.shift();
 
-   return loadImage(image_url)
-   .then(function(img) {
-     document.getElementById("smg_lazy").style.display = 'none';
-     displayData(museum, image_url, object_link, title, targetTags, queryTags);
+    var fallbackData = {
+      'query_tags': data['query_tags'],
+      'top_tags': data['top_tags'].slice(0),
+      'top_id': data['top_id'].slice(0)
+    }
+
+    var endpoint = "https://collection.sciencemuseumgroup.org.uk/objects/";
+    url = endpoint + String(targetID) 
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+    
+    return fetch(url, requestOptions)
+    .then(response => response.json())
+    .then(function (response) {
+      data = response['data']['attributes']
+      image_url = data['multimedia'][0]['@processed']['large']['location']
+      title = data['title'][0]['value']
+      object_link = url
+
+    return loadImage(image_url)
+    .then(function(img) {
+      document.getElementById("smg_lazy").style.display = 'none';
+      displayData(museum, image_url, object_link, title, targetTags, queryTags);
+      })
+    .catch(function(err) {
+      console.log(err);
+      console.log('hi')
+      getDataSMG(fallbackData)
     })
-   .catch(function(err) {
-     console.log(err);
-     getDataSMG(data)
-   })
-  })
-  .catch(function(err) {
-    console.log(err);
-    getDataSMG(data)
-  })
+    })
+    .catch(function(err) {
+      console.log(err);
+      console.log('hi')
+      getDataSMG(fallbackData)
+    })
+  } else {
+    document.getElementById("smg_lazy").style.display = 'none'
+    document.getElementById("smg_error").style.display = 'flex';
+  }
 }
 
 $('#doodle_predict').click(function () {
