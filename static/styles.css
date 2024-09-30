@@ -415,7 +415,8 @@ input[type="file"] {
     }
 
     .tablinks {
-        font-size: 200%
+        font-size: 200%;
+        padding-bottom: 3%
     }
 
     .about-body {
@@ -457,7 +458,8 @@ input[type="file"] {
     }
 
     .tablinks {
-        font-size: 170%
+        font-size: 170%;
+        padding-bottom: 2%
     }  
 
     .about-body {
