@@ -17,13 +17,10 @@
 
       document.getElementById(elmnt).style.borderBottom = "2px solid black";
       document.getElementById(elmnt_other).style.borderBottom = "none";
-  
   }
 
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("tab_draw").click(); 
-
-
 
     //https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
   var base64;
@@ -60,7 +57,7 @@
   // // When the user clicks anywhere outside of the modal, close it
   // window.onclick = function(event) {
   //   if (event.target != popupContainer) {
-  //     popupContainer.style.display = "none";
+  //     popupContainer.style.display == "none";
   //   }
   // }
 
