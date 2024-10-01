@@ -46,6 +46,11 @@ src: url(zigzag-rounded.woff2);
 }
 
 .tag-body {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
     hyphens: auto;
 }
 
@@ -175,7 +180,8 @@ canvas {
 
 .tags_wrapper {
     display: grid;
-    grid-template-columns: 1fr auto 8% 1fr auto;
+    /* grid-template-columns: 1fr auto 8% 1fr auto; */
+    grid-template-columns: minmax(0,1fr) auto 8% minmax(0,1fr) auto;
     grid-template-rows: repeat(6,  auto);
 }
 
@@ -195,6 +201,11 @@ canvas {
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 12%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
     hyphens: auto;
 }
 
