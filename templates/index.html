@@ -17,13 +17,20 @@
     <div class="popup-container">
         <button class="popup-close-button" onClick="closePopup()"><i class="material-icons close">close</i></button>
         <div class="popup-box">
-            <p class="about-body">                
-                Sketchy Collections is an AI-driven image search tool that lets you explore and compare three museum collections by drawing images. 
-                It can be hard knowing where to start or what to look for in a digital museum collection. This tool was made to provide a playful and intuitive
-                alternative to traditional collections interfaces.
+            <p class="about-body">     
+                Sketchy Collections is an AI-driven image search tool that makes it possible to explore select museum collections by drawing a picture. 
+                The tool analyses the sketch and images of museum objects, predicting text descriptions based on each museum's own terminology, and compares those to find the top match. 
+                It makes exploring both cultural heritage and AI technology more intuitive and fun!    
                 <br><br>
-                The image retrieval system is based on an AI model called CLIP. 
-                It turns your drawing and all museum objects into lists of the most likely
+                The tool uses an AI model called <a href="https://github.com/openai/CLIP">CLIP</a> to turn the images into long lists of terms with probabilities. 
+                In the app, you can see the five top terms for both the sketch and the matching images. Each museum has its own vocabulary, some of which are tags made for the public or terms used for cataloguing the museum objects.
+                <br><br>
+                When comparing the images and tags across different museums, we can see how the AI model sees images and how it describes them given different <q>languages</q> of museums. 
+                All of this is shaped by different factors: What was the model trained on initially? What objects are included in the museums? How do museums talk about their collections?
+                <br><br>
+            </p>
+            <p> 
+                by Polo Sologub – <a href="https://polosologub.com">polosologub.com</a>
             </p>
         </div>
     </div>

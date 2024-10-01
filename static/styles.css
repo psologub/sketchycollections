@@ -280,8 +280,8 @@ canvas {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    width: 40%; /* Full width */
-    height: 70%; /* Full height */
+    width: 40%; 
+    height: 80%;
     background:white;
     border: 2px solid black; 
     top: 50%;
