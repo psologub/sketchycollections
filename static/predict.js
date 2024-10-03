@@ -67,50 +67,62 @@ function clearData(museum) {
   } 
 }
 
-//TODO add error handling
 function getDataCooper(data) {
-  var museum = 'cooper';
+  var museum = 'smg';
   clearData(museum);
-  document.getElementById("cooper_lazy").style.display = 'grid';
+  document.getElementById("smg_lazy").style.display = 'grid';
   var image_url;
   var title;
   var object_link;
   var queryTags = data['query_tags'];
   var objectTags = data['top_tags'];
   var objectID = data['top_id'];
-  var targetTags = objectTags.shift();
-  var targetID = objectID.shift();
-  var endpoint = "https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&accession_number=";
-  var api_key = config.COOPER_API_KEY //TODO figure out env
-  url = endpoint + String(targetID) + api_key;
 
-  var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-  
-  return fetch(url, requestOptions)
-  .then(response => response.json())
-  .then(function (response) {
-    image_url = response['object']['images'][0]['z']['url'];
-    title = response['object']['title']
-    object_link = response['object']['url']
+  if (objectTags.length > 0) {
+    var targetTags = objectTags.shift();
+    var targetID = objectID.shift();
+    var fallbackData = {
+      'query_tags': data['query_tags'],
+      'top_tags': data['top_tags'].slice(0),
+      'top_id': data['top_id'].slice(0)
+    }
 
-   return loadImage(image_url)
-   .then(function(img) {
-     console.log(img);
-     document.getElementById("cooper_lazy").style.display = 'none';
-     displayData(museum, image_url, object_link, title, targetTags, queryTags);
+    var endpoint = "https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&accession_number=";
+    // var api_key = config.COOPER_API_KEY //TODO figure out env
+    var api_key = "&access_token=b28a37e593fba2764cf987b6f8918fac"//TODO figure out env
+    url = endpoint + String(targetID) + api_key;
+
+    var requestOptions = {
+          method: 'GET',
+          redirect: 'follow'
+        };
+    
+    return fetch(url, requestOptions)
+    .then(response => response.json())
+    .then(function (response) {
+      image_url = response['object']['images'][0]['z']['url'];
+      title = response['object']['title']
+      object_link = response['object']['url']
+
+    return loadImage(image_url)
+    .then(function(img) {
+      console.log(img);
+      document.getElementById("smg_lazy").style.display = 'none';
+      displayData(museum, image_url, object_link, title, targetTags, queryTags);
+      })
+    .catch(function(err) {
+      console.log(err);
+      getDataCooper(fallbackData);
     })
-   .catch(function(err) {
-     console.log(err);
-     getDataCooper(data);
-   })
-  })
-  .catch(function(err) {
-    console.log(err);
-    getDataCooper(data);
-  })
+    })
+    .catch(function(err) {
+      console.log(err);
+      getDataCooper(fallbackData);
+    })
+  } else {
+    document.getElementById("smg_lazy").style.display = 'none'
+    document.getElementById("smg_error").style.display = 'grid';
+  }
 }
 
 function getDataTate(data) {
@@ -309,7 +321,8 @@ $('#doodle_predict').click(function () {
   }).then(async function (data) {
     //TODO get all data here when env sorted
     // var getDataAll = [getDataCooper(data['match_data']['cooper']), getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science'])] 
-    var getDataAll = [getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science']), getDataTate(data['match_data']['tate'])]
+    // var getDataAll = [getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science']), getDataTate(data['match_data']['tate'])]
+    var getDataAll = [getDataMet(data['match_data']['met']), getDataCooper(data['match_data']['cooper']), getDataTate(data['match_data']['tate'])]
     return Promise.all(getDataAll)
   }
   ).then(function (data) {

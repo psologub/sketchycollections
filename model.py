@@ -83,9 +83,13 @@ tate_tag_features /= tate_tag_features.norm(dim=-1, keepdim=True)
 #                "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id],
 #                "science": [science_tag_features, science_tag_softmax, science_text_features, science_tags, science_id]}
 
+# museum_data = {"tate": [tate_tag_features, tate_tag_softmax, tate_text_features, tate_tags, tate_id],
+#                "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id],
+#                "science": [science_tag_features, science_tag_softmax, science_text_features, science_tags, science_id]}
+
 museum_data = {"tate": [tate_tag_features, tate_tag_softmax, tate_text_features, tate_tags, tate_id],
                "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id],
-               "science": [science_tag_features, science_tag_softmax, science_text_features, science_tags, science_id]}
+               "cooper": [cooper_tag_features, cooper_tag_softmax, cooper_text_features, cooper_tags, cooper_id]}
 
 
 #### GET PREDICTIONS
@@ -118,7 +122,9 @@ def get_matches(image, museum_data=museum_data, tate_image_links=tate_image_link
 
     #Setup dictionary -> will be JSON response that is sent back to client   
     # result = {"cooper": {}, "met": {}, "science": {}}
-    result = {"tate": {}, "met": {}, "science": {}}
+    # result = {"tate": {}, "met": {}, "science": {}}
+    result = {"tate": {}, "met": {}, "cooper": {}}
+
      
     #1. Get query image feature
     image_input = decode_base64(image)
