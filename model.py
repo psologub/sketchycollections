@@ -30,12 +30,14 @@ tate_tags = df_tate['term'].tolist()
 
 #Load ID lookup lists -> no duplicates
 cooper_id = np.load("data/final/cooper/cooper-hewitt_id-list_unique.npy", allow_pickle=True)
-met_id = np.load("data/final/met/met_image-feature-id-list_unique.npy")
+# met_id = np.load("data/final/met/met_image-feature-id-list_unique.npy")
+met_id = np.load("data/final/met/met_id_list_2024.npy")
 science_id = np.load("data/final/smg/science-museum_feature-id-list_2_unique.npy")
 tate_id = np.load('data/final/tate/tate_image-id-list.npy')
 
 #load image link lookup list for Tate
 tate_image_links = pd.read_csv('data/final/tate/tate_sketchy_collections_metadata_selection.csv')
+met_image_links = pd.read_csv('data/final/met/met_sketchy_metadata_2024.csv')
 
 #Load text features V3 "an image of" -> normalised
 cooper_text_features = np.load("data/final/cooper/cooper-hewitt_text-features_3_norm.npy")
@@ -50,7 +52,8 @@ tate_text_features = torch.from_numpy(tate_text_features).to(device)
 
 #Load image features -> no duplicates
 cooper_img_features = np.load("data/final/cooper/cooper_image-features_unique.npy")
-met_img_features = np.load("data/final/met/met_image-features_unique.npy")
+# met_img_features = np.load("data/final/met/met_image-features_unique.npy")
+met_img_features = np.load("data/final/met/met_image_features_2024.npy")
 science_img_features = np.load("data/final/smg/science-museum_image-features_2_unique.npy")
 tate_img_features = np.load("data/final/tate/tate_image-features.npy")
 
