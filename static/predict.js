@@ -67,61 +67,102 @@ function clearData(museum) {
   } 
 }
 
-function getDataCooper(data) {
+function getDataCooper(data,csvUpload) {
   var museum = 'smg';
   clearData(museum);
   document.getElementById("smg_lazy").style.display = 'grid';
-  var image_url;
-  var title;
-  var object_link;
-  var queryTags = data['query_tags'];
-  var objectTags = data['top_tags'];
-  var objectID = data['top_id'];
 
-  if (objectTags.length > 0) {
-    var targetTags = objectTags.shift();
-    var targetID = objectID.shift();
-    var fallbackData = {
-      'query_tags': data['query_tags'],
-      'top_tags': data['top_tags'].slice(0),
-      'top_id': data['top_id'].slice(0)
-    }
+  if (csvUpload == true) {
+    var image_url = data['image_url']
+    var title = data['title']
+    var object_link = data['artwork_page']
+    var queryTags = data['query_tags'];
+    var objectTags = data['top_tags'];
+    var objectID = data['top_id'];
 
-    var endpoint = "https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&accession_number=";
-    // var api_key = config.COOPER_API_KEY //TODO figure out env
-    var api_key = "&access_token=b28a37e593fba2764cf987b6f8918fac"//TODO figure out env
-    url = endpoint + String(targetID) + api_key;
+    if (objectTags.length > 0) {
+      var targetTags = objectTags.shift();
+      var targetID = objectID.shift();
+      var targetTitle = title.shift()
+      var targetObjectLink = object_link.shift()
+      var targetImageUrl = image_url.shift()
 
-    var requestOptions = {
-          method: 'GET',
-          redirect: 'follow'
-        };
-    
-    return fetch(url, requestOptions)
-    .then(response => response.json())
-    .then(function (response) {
-      image_url = response['object']['images'][0]['z']['url'];
-      title = response['object']['title']
-      object_link = response['object']['url']
+      var fallbackData = {
+        'image_url': data['image_url'].splice(0),
+        'title': data['title'].splice(0),
+        'query_tags': data['query_tags'],
+        'artwork_page': data['artwork_page'].splice(0),
+        'top_tags': data['top_tags'].slice(0),
+        'top_id': data['top_id'].slice(0)
+      }
 
-    return loadImage(image_url)
-    .then(function(img) {
-      console.log(img);
-      document.getElementById("smg_lazy").style.display = 'none';
-      displayData(museum, image_url, object_link, title, targetTags, queryTags);
+      return loadImage(targetImageUrl)
+      .then(function(img) {
+        console.log(img);
+        document.getElementById("smg_lazy").style.display = 'none';
+        displayData(museum, targetImageUrl, targetObjectLink, targetTitle, targetTags, queryTags);
+        })
+      .catch(function(err) {
+        console.log(err);
+        getDataTate(fallbackData);
       })
-    .catch(function(err) {
-      console.log(err);
-      getDataCooper(fallbackData);
-    })
-    })
-    .catch(function(err) {
-      console.log(err);
-      getDataCooper(fallbackData);
-    })
+    } else {
+      document.getElementById("smg_lazy").style.display = 'none'
+      document.getElementById("smg_error").style.display = 'grid'; 
+    }
   } else {
-    document.getElementById("smg_lazy").style.display = 'none'
-    document.getElementById("smg_error").style.display = 'grid';
+    var image_url;
+    var title;
+    var object_link;
+    var queryTags = data['query_tags'];
+    var objectTags = data['top_tags'];
+    var objectID = data['top_id'];
+
+    if (objectTags.length > 0) {
+      var targetTags = objectTags.shift();
+      var targetID = objectID.shift();
+      var fallbackData = {
+        'query_tags': data['query_tags'],
+        'top_tags': data['top_tags'].slice(0),
+        'top_id': data['top_id'].slice(0)
+      }
+
+      var endpoint = "https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&accession_number=";
+      // var api_key = config.COOPER_API_KEY //TODO figure out env
+      var api_key = "&access_token=b28a37e593fba2764cf987b6f8918fac"//TODO figure out env
+      url = endpoint + String(targetID) + api_key;
+
+      var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+          };
+      
+      return fetch(url, requestOptions)
+      .then(response => response.json())
+      .then(function (response) {
+        image_url = response['object']['images'][0]['z']['url'];
+        title = response['object']['title']
+        object_link = response['object']['url']
+
+      return loadImage(image_url)
+      .then(function(img) {
+        console.log(img);
+        document.getElementById("smg_lazy").style.display = 'none';
+        displayData(museum, image_url, object_link, title, targetTags, queryTags);
+        })
+      .catch(function(err) {
+        console.log(err);
+        getDataCooper(fallbackData);
+      })
+      })
+      .catch(function(err) {
+        console.log(err);
+        getDataCooper(fallbackData);
+      })
+    } else {
+      document.getElementById("smg_lazy").style.display = 'none'
+      document.getElementById("smg_error").style.display = 'grid';
+    }
   }
 }
 
@@ -169,62 +210,103 @@ function getDataTate(data) {
 }
 
 
-function getDataMet(data) {
+function getDataMet(data, csvUpload) {
   var museum = 'cooper';
   clearData(museum);
   document.getElementById("cooper_lazy").style.display = 'grid';
 
-  var image_url;
-  var title;
-  var object_link;
-  var queryTags = data['query_tags'];
-  var objectTags = data['top_tags'];
-  var objectID = data['top_id'];
+  if (csvUpload === true) {
+    var image_url = data['image_url']
+    var title = data['title']
+    var object_link = data['artwork_page']
+    var queryTags = data['query_tags'];
+    var objectTags = data['top_tags'];
+    var objectID = data['top_id'];
 
-  if (objectTags.length > 0) {
-    var targetTags = objectTags.shift();
-    var targetID = objectID.shift();
+    if (objectTags.length > 0) {
+      var targetTags = objectTags.shift();
+      var targetID = objectID.shift();
+      var targetTitle = title.shift()
+      var targetObjectLink = object_link.shift()
+      var targetImageUrl = image_url.shift()
 
-    var fallbackData = {
-      'query_tags': data['query_tags'],
-      'top_tags': data['top_tags'].slice(0),
-      'top_id': data['top_id'].slice(0)
-    }
+      var fallbackData = {
+        'image_url': data['image_url'].splice(0),
+        'title': data['title'].splice(0),
+        'query_tags': data['query_tags'],
+        'artwork_page': data['artwork_page'].splice(0),
+        'top_tags': data['top_tags'].slice(0),
+        'top_id': data['top_id'].slice(0)
+      }
 
-    var endpoint = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
-    url = endpoint + String(targetID) 
-
-    var requestOptions = {
-          method: 'GET',
-          redirect: 'follow'
-        };
-    
-    return fetch(url, requestOptions)
-    .then(response => response.json())
-    .then(function (response) {
-      image_url = response['primaryImage']
-      title = response['title']
-      object_link = response['objectURL']
-
-
-    return loadImage(image_url)
-    .then(function(img) {
-      console.log(img);
-      document.getElementById("cooper_lazy").style.display = 'none';
-      displayData(museum, image_url, object_link, title, targetTags, queryTags);
+      return loadImage(targetImageUrl)
+      .then(function(img) {
+        console.log(img);
+        document.getElementById("cooper_lazy").style.display = 'none';
+        displayData(museum, targetImageUrl, targetObjectLink, targetTitle, targetTags, queryTags);
+        })
+      .catch(function(err) {
+        console.log(err);
+        getDataTate(fallbackData);
       })
-    .catch(function(err) {
-      console.log(err);
-      getDataMet(fallbackData)
-    })
-    })
-    .catch(function(err) {
-      console.log(err);
-      getDataMet(fallbackData)
-    })
+    } else {
+      document.getElementById("cooper_lazy").style.display = 'none'
+      document.getElementById("cooper_error").style.display = 'grid'; 
+    }
+  
   } else {
-    document.getElementById("cooper_lazy").style.display = 'none'
-    document.getElementById("cooper_error").style.display = 'grid';
+    var image_url;
+    var title;
+    var object_link;
+    var queryTags = data['query_tags'];
+    var objectTags = data['top_tags'];
+    var objectID = data['top_id'];
+
+    if (objectTags.length > 0) {
+      var targetTags = objectTags.shift();
+      var targetID = objectID.shift();
+
+      var fallbackData = {
+        'query_tags': data['query_tags'],
+        'top_tags': data['top_tags'].slice(0),
+        'top_id': data['top_id'].slice(0)
+      }
+
+      var endpoint = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
+      url = endpoint + String(targetID) 
+
+      var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+          };
+      
+      return fetch(url, requestOptions)
+      .then(response => response.json())
+      .then(function (response) {
+        image_url = response['primaryImage']
+        title = response['title']
+        object_link = response['objectURL']
+
+
+      return loadImage(image_url)
+      .then(function(img) {
+        console.log(img);
+        document.getElementById("cooper_lazy").style.display = 'none';
+        displayData(museum, image_url, object_link, title, targetTags, queryTags);
+        })
+      .catch(function(err) {
+        console.log(err);
+        getDataMet(fallbackData)
+      })
+      })
+      .catch(function(err) {
+        console.log(err);
+        getDataMet(fallbackData)
+      })
+    } else {
+      document.getElementById("cooper_lazy").style.display = 'none'
+      document.getElementById("cooper_error").style.display = 'grid';
+    }
   }
 }
 
@@ -322,7 +404,7 @@ $('#doodle_predict').click(function () {
     //TODO get all data here when env sorted
     // var getDataAll = [getDataCooper(data['match_data']['cooper']), getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science'])] 
     // var getDataAll = [getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science']), getDataTate(data['match_data']['tate'])]
-    var getDataAll = [getDataMet(data['match_data']['met']), getDataCooper(data['match_data']['cooper']), getDataTate(data['match_data']['tate'])]
+    var getDataAll = [getDataMet(data['match_data']['met'],csvUpload=true), getDataCooper(data['match_data']['cooper'],csvUpload=false), getDataTate(data['match_data']['tate'])]
     return Promise.all(getDataAll)
   }
   ).then(function (data) {
