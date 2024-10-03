@@ -30,12 +30,15 @@ tate_tags = df_tate['term'].tolist()
 
 #Load ID lookup lists -> no duplicates
 cooper_id = np.load("data/final/cooper/cooper-hewitt_id-list_unique.npy", allow_pickle=True)
-met_id = np.load("data/final/met/met_image-feature-id-list_unique.npy")
+# met_id = np.load("data/final/met/met_image-feature-id-list_unique.npy")
+met_id = np.load("data/final/met/met_id_list_2024.npy")
 science_id = np.load("data/final/smg/science-museum_feature-id-list_2_unique.npy")
 tate_id = np.load('data/final/tate/tate_image-id-list.npy')
 
 #load image link lookup list for Tate
 tate_image_links = pd.read_csv('data/final/tate/tate_sketchy_collections_metadata_selection.csv')
+met_image_links = pd.read_csv('data/final/met/met_sketchy_metadata_2024.csv')
+met_image_links['id'] = met_image_links['id'].astype(str)
 
 #Load text features V3 "an image of" -> normalised
 cooper_text_features = np.load("data/final/cooper/cooper-hewitt_text-features_3_norm.npy")
@@ -50,7 +53,8 @@ tate_text_features = torch.from_numpy(tate_text_features).to(device)
 
 #Load image features -> no duplicates
 cooper_img_features = np.load("data/final/cooper/cooper_image-features_unique.npy")
-met_img_features = np.load("data/final/met/met_image-features_unique.npy")
+# met_img_features = np.load("data/final/met/met_image-features_unique.npy")
+met_img_features = np.load("data/final/met/met_image_features_2024.npy")
 science_img_features = np.load("data/final/smg/science-museum_image-features_2_unique.npy")
 tate_img_features = np.load("data/final/tate/tate_image-features.npy")
 
@@ -87,9 +91,9 @@ tate_tag_features /= tate_tag_features.norm(dim=-1, keepdim=True)
 #                "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id],
 #                "science": [science_tag_features, science_tag_softmax, science_text_features, science_tags, science_id]}
 
-museum_data = {"tate": [tate_tag_features, tate_tag_softmax, tate_text_features, tate_tags, tate_id],
-               "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id],
-               "cooper": [cooper_tag_features, cooper_tag_softmax, cooper_text_features, cooper_tags, cooper_id]}
+museum_data = {"tate": [tate_tag_features, tate_tag_softmax, tate_text_features, tate_tags, tate_id, tate_image_links],
+               "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id, met_image_links],
+               "cooper": [cooper_tag_features, cooper_tag_softmax, cooper_text_features, cooper_tags, cooper_id, None]}
 
 
 #### GET PREDICTIONS
@@ -118,7 +122,7 @@ def predict_query(image):
 
 
 #Get top n matches for each museum -> get top IDs, query tags and match tags
-def get_matches(image, museum_data=museum_data, tate_image_links=tate_image_links, results_count=9):
+def get_matches(image, museum_data=museum_data, tate_image_links=tate_image_links, results_count=9, csvUpload=True):
 
     #Setup dictionary -> will be JSON response that is sent back to client   
     # result = {"cooper": {}, "met": {}, "science": {}}
@@ -137,6 +141,8 @@ def get_matches(image, museum_data=museum_data, tate_image_links=tate_image_link
         text_features = museum_data[i][2]
         tags = museum_data[i][3]
         object_id = museum_data[i][4]
+        if csvUpload == True:
+            image_links = museum_data[i][5]
         
         #2. Get query tag feature and compare against collection tag features
         
@@ -183,16 +189,16 @@ def get_matches(image, museum_data=museum_data, tate_image_links=tate_image_link
 
         #4. Add museum data (Tate)
 
-        if i == 'tate':
+        if csvUpload == True and (i == 'met' or i == 'tate'):
             image_urls = []
             titles = []
             artwork_pages = []
             for j in matches:
-                image_url = tate_image_links.loc[tate_image_links['id'] == j]['image'].values[0] 
+                image_url = image_links.loc[image_links['id'] == j]['image'].values[0] 
                 image_urls.append(image_url)
-                title = tate_image_links.loc[tate_image_links['id'] == j]['title'].values[0] 
+                title = image_links.loc[image_links['id'] == j]['title'].values[0] 
                 titles.append(title)
-                artwork_page = tate_image_links.loc[tate_image_links['id'] == j]['artwork_page'].values[0] 
+                artwork_page = image_links.loc[image_links['id'] == j]['artwork_page'].values[0] 
                 artwork_pages.append(artwork_page)
 
                 result["{0}".format(i)]["image_url"] = image_urls
