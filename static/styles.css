@@ -265,8 +265,10 @@ canvas {
     align-self: center;
     margin: auto;
     display: block;
-    width:94%;
-    height: 24%;
+    /* width:94%;
+    height: 24%; */
+    width: 100px;
+    height: 40px;
     border: 2px solid black;
     cursor: pointer;
     color: black;
@@ -435,7 +437,81 @@ input[type="file"] {
     justify-self: center;
 }
 
+
+@media screen and (max-width: 1179px) {
+    .button {
+        width: 68px;
+        height: 38px;
+    }
+
+}
+
+@media screen and (min-width: 1180px) {
+    .button {
+        width: 78px;
+        height: 38px;
+    }
+
+}
+  
+@media screen and (max-width: 1279px) {
+    /* .button {
+        width: 68px;
+        height: 38px;
+    } */
+
+    .app-title {
+        font-size: 270%
+    }
+
+    .museum-title {
+        font-size: 170%
+    }
+
+    .tablinks {
+        font-size: 170%;
+        padding-bottom: 2%
+    }  
+
+    .about-body {
+        font-size: 140%;
+    }
+
+    .tag {
+        font-size: 110%;
+    }
+
+    .query-title {
+        font-size: 130%
+    }
+
+    .img-title {
+        font-size: 130%;
+    }
+
+    .material-icons {
+        font-size: 100%;
+    }
+
+    .material-icons.close {
+        font-size: 120%;
+    }
+
+    .button {
+        font-size: 120%;
+    }
+
+    p {
+        font-size: 110%;
+    }
+}
+
 @media screen and (min-width: 1280px) {
+    /* .button {
+        width: 80px;
+        height: 40px;
+    } */
+
     .app-title {
         font-size: 300%
     }
@@ -477,54 +553,21 @@ input[type="file"] {
         font-size: 130%;
     }
   }
-  
-  @media screen and (max-width: 1279px) {
-    .app-title {
-        font-size: 270%
-    }
 
-    .museum-title {
-        font-size: 170%
-    }
-
-    .tablinks {
-        font-size: 170%;
-        padding-bottom: 2%
-    }  
-
-    .about-body {
-        font-size: 140%;
-    }
-    
-    .tag {
-        font-size: 110%;
-    }
-
-    .query-title {
-        font-size: 130%
-    }
-  
-    .img-title {
-        font-size: 130%;
-    }
-
-    .material-icons {
-        font-size: 100%;
-    }
-
-    .material-icons.close {
-        font-size: 120%;
-    }
-
+@media screen and (min-width: 1366px) {
     .button {
-        font-size: 120%;
+        width: 90px;
+        height: 40px;
     }
+}
 
-    p {
-        font-size: 110%;
+@media screen and (min-width: 1500px) {
+    .button {
+        width: 100px;
+        height: 40px;
     }
-  }
-
+}
+  
 @media screen and (max-width: 767px) {
     .mobile-error-container {
         display: flex;
