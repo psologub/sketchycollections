@@ -29,7 +29,8 @@ df_tate = pd.read_csv('data/final/tate/tate-subject-terms.csv')
 tate_tags = df_tate['term'].tolist()
 
 #Load ID lookup lists -> no duplicates
-cooper_id = np.load("data/final/cooper/cooper-hewitt_id-list_unique.npy", allow_pickle=True)
+# cooper_id = np.load("data/final/cooper/cooper-hewitt_id-list_unique.npy", allow_pickle=True)
+cooper_id = np.load("data/final/cooper/cooper_id_list_2024.npy")
 # met_id = np.load("data/final/met/met_image-feature-id-list_unique.npy")
 met_id = np.load("data/final/met/met_id_list_2024.npy")
 science_id = np.load("data/final/smg/science-museum_feature-id-list_2_unique.npy")
@@ -39,6 +40,7 @@ tate_id = np.load('data/final/tate/tate_image-id-list.npy')
 tate_image_links = pd.read_csv('data/final/tate/tate_sketchy_collections_metadata_selection.csv')
 met_image_links = pd.read_csv('data/final/met/met_sketchy_metadata_2024.csv')
 met_image_links['id'] = met_image_links['id'].astype(str)
+cooper_image_links = pd.read_csv('data/final/cooper/cooper_sketchy_metadata_2024.csv')
 
 #Load text features V3 "an image of" -> normalised
 cooper_text_features = np.load("data/final/cooper/cooper-hewitt_text-features_3_norm.npy")
@@ -52,7 +54,8 @@ science_text_features = torch.from_numpy(science_text_features).to(device)
 tate_text_features = torch.from_numpy(tate_text_features).to(device)
 
 #Load image features -> no duplicates
-cooper_img_features = np.load("data/final/cooper/cooper_image-features_unique.npy")
+# cooper_img_features = np.load("data/final/cooper/cooper_image-features_unique.npy")
+cooper_img_features = np.load("data/final/cooper/cooper_image_features_2024.npy")
 # met_img_features = np.load("data/final/met/met_image-features_unique.npy")
 met_img_features = np.load("data/final/met/met_image_features_2024.npy")
 science_img_features = np.load("data/final/smg/science-museum_image-features_2_unique.npy")
@@ -93,7 +96,7 @@ tate_tag_features /= tate_tag_features.norm(dim=-1, keepdim=True)
 
 museum_data = {"tate": [tate_tag_features, tate_tag_softmax, tate_text_features, tate_tags, tate_id, tate_image_links],
                "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id, met_image_links],
-               "cooper": [cooper_tag_features, cooper_tag_softmax, cooper_text_features, cooper_tags, cooper_id, None]}
+               "cooper": [cooper_tag_features, cooper_tag_softmax, cooper_text_features, cooper_tags, cooper_id, cooper_image_links]}
 
 
 #### GET PREDICTIONS
@@ -122,7 +125,7 @@ def predict_query(image):
 
 
 #Get top n matches for each museum -> get top IDs, query tags and match tags
-def get_matches(image, museum_data=museum_data, tate_image_links=tate_image_links, results_count=9, csvUpload=True):
+def get_matches(image, museum_data=museum_data, results_count=9, csvUpload=True):
 
     #Setup dictionary -> will be JSON response that is sent back to client   
     # result = {"cooper": {}, "met": {}, "science": {}}
@@ -189,7 +192,7 @@ def get_matches(image, museum_data=museum_data, tate_image_links=tate_image_link
 
         #4. Add museum data (Tate)
 
-        if csvUpload == True and (i == 'met' or i == 'tate'):
+        if csvUpload == True:
             image_urls = []
             titles = []
             artwork_pages = []
