@@ -21,7 +21,10 @@ function displayData(museum, image_url, object_link, title, targetTags, queryTag
   a.target="_blank";
   a.appendChild(iconSpan);
   
-  document.getElementById(`${museum}_img_title`).appendChild(a);
+  if (document.getElementById(`${museum}_img_title`).childElementCount === 0) {
+    document.getElementById(`${museum}_img_title`).appendChild(a);
+  }
+  // document.getElementById(`${museum}_img_title`).appendChild(a);
   // document.getElementById(`${museum}_img_title`).appendChild(iconSpan);
 
   $(`#${museum}_img_1`).css('background-image', 'url("' +  image_url + '")');
@@ -407,7 +410,6 @@ $('#doodle_predict').click(function () {
     return Promise.all(getDataAll)
   }
   ).then(function (data) {
-      console.log('nice');
     }).catch(function (error) {
       console.warn(error);
     }); 
@@ -442,9 +444,7 @@ $('#image_predict').click(function () {
     return Promise.all(getDataAll)
   }
   ).then(function (data) {
-      console.log('nice');
     }).catch(function (error) {
-      
       console.warn(error);
     }); 
 
