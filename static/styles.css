@@ -360,6 +360,25 @@ input[type="file"] {
     text-align: center;
 }
 
+.mobile-error-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1;
+    padding: 10%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-error-box {
+    background: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
 /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje*/
 .spinner-1 {
     width: 40px;
@@ -505,3 +524,9 @@ input[type="file"] {
         font-size: 110%;
     }
   }
+
+@media screen and (max-width: 767px) {
+    .mobile-error-container {
+        display: flex;
+    }
+}
