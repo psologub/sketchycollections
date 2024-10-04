@@ -39,9 +39,9 @@ api.add_resource(Index, '/')
 
 #Run app
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', port=8000, debug=True)
-    http_server = WSGIServer((("0.0.0.0", 8000)), app)
-    http_server.serve_forever()
+    app.run(host='0.0.0.0', port=8000, debug=True)
+    # http_server = WSGIServer((("0.0.0.0", 8000)), app)
+    # http_server.serve_forever()
 
 
 
