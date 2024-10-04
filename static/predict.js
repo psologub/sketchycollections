@@ -128,8 +128,7 @@ function getDataCooper(data,csvUpload) {
       }
 
       var endpoint = "https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&accession_number=";
-      // var api_key = config.COOPER_API_KEY //TODO figure out env
-      var api_key = "&access_token=b28a37e593fba2764cf987b6f8918fac"//TODO figure out env
+      var api_key = config.COOPER_API_KEY //TODO figure out env
       url = endpoint + String(targetID) + api_key;
 
       var requestOptions = {
@@ -404,7 +403,7 @@ $('#doodle_predict').click(function () {
     //TODO get all data here when env sorted
     // var getDataAll = [getDataCooper(data['match_data']['cooper']), getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science'])] 
     // var getDataAll = [getDataMet(data['match_data']['met']), getDataSMG(data['match_data']['science']), getDataTate(data['match_data']['tate'])]
-    var getDataAll = [getDataMet(data['match_data']['met'],csvUpload=true), getDataCooper(data['match_data']['cooper'],csvUpload=false), getDataTate(data['match_data']['tate'])]
+    var getDataAll = [getDataMet(data['match_data']['met'],csvUpload=true), getDataCooper(data['match_data']['cooper'],csvUpload=true), getDataTate(data['match_data']['tate'])]
     return Promise.all(getDataAll)
   }
   ).then(function (data) {
