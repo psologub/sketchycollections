@@ -5,6 +5,7 @@ import base64
 from io import BytesIO
 from PIL import Image
 import model
+from gevent.pywsgi import WSGIServer
 
 #Set up app
 app = Flask(__name__)
@@ -38,8 +39,9 @@ api.add_resource(Index, '/')
 
 #Run app
 if __name__ == "__main__":
-    # app.run(debug=True)
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    # app.run(host='0.0.0.0', port=8000, debug=True)
+    http_server = WSGIServer((("0.0.0.0", 8000)), app)
+    http_server.serve_forever()
 
 
 
