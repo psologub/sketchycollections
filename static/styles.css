@@ -12,7 +12,7 @@ html {
 }
 
 .app-title {
-    font-family: 'ZIGZAG';
+    font-family: 'ZIGZAG', 'Nunito', Helvetica, sans-serif;
     font-size: 3rem;
     font-feature-settings: 'clig' 1;
     text-transform: uppercase;
@@ -36,7 +36,6 @@ body {
 font-family: ZIGZAG;
 src: url(zigzag-rounded.woff2);
 }
-
 
 .tag {
     font-size: 1.3rem;
@@ -114,8 +113,8 @@ a:hover {
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center; /* center horizontally */ 
-	align-items: center; /* center vertically */ 
+    justify-content: center; 
+	align-items: center;
     }
 
 canvas {
@@ -132,10 +131,6 @@ canvas {
 .img-box {
     max-height: 100%;
 }
-
-/* .img-box:hover {
-    transform:scale(1.5);
-} */
 
 .upload-img, .match-img {
     overflow: visible;
@@ -161,14 +156,12 @@ canvas {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     align-items: center;
-    justify-items: center; /* adjusted */
-
+    justify-items: center; 
 }
 
 .img-placeholder {
     display: block;
     background-color: #f3f2f2;
-    /* TODO double check img upload */
     height: 100%;
     width: 100%; 
 }
@@ -180,7 +173,6 @@ canvas {
 
 .tags_wrapper {
     display: grid;
-    /* grid-template-columns: 1fr auto 8% 1fr auto; */
     grid-template-columns: minmax(0,1fr) auto 8% minmax(0,1fr) auto;
     grid-template-rows: repeat(6,  auto);
 }
@@ -222,7 +214,6 @@ canvas {
     margin: auto;
 }
 
-/* TODO make responsive */
 .tablinks {
     cursor: pointer;
     color: black;
@@ -265,8 +256,6 @@ canvas {
     align-self: center;
     margin: auto;
     display: block;
-    /* width:94%;
-    height: 24%; */
     width: 100px;
     height: 40px;
     border: 2px solid black;
@@ -279,9 +268,9 @@ canvas {
 }
 
 .popup-container {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none; 
+    position: fixed;
+    z-index: 1; 
     width: 40%; 
     height: 80%;
     background:white;
@@ -380,7 +369,6 @@ input[type="file"] {
     vertical-align: middle;
 }
 
-
 /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje*/
 .spinner-1 {
     width: 40px;
@@ -406,7 +394,7 @@ input[type="file"] {
   font-family: 'Material Icons';
   font-weight: bold;
   font-style: normal;
-  font-size: 15px;  /* Preferred icon size */
+  font-size: 15px;  
   display: inline-block;
   text-transform: none;
   letter-spacing: normal;
@@ -507,11 +495,6 @@ input[type="file"] {
 }
 
 @media screen and (min-width: 1280px) {
-    /* .button {
-        width: 80px;
-        height: 40px;
-    } */
-
     .app-title {
         font-size: 300%
     }
