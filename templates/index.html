@@ -7,7 +7,7 @@
   <title>Sketchy Collections</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500&family=Noto+Sans&family=Poppins&family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500&family=Noto+Sans&family=Poppins&family=Source+Sans+Pro&family=Nunito:ital,wght@0,700;1,700&display=swap" rel="stylesheet"> 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../static/styles.css">
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>    
@@ -52,7 +52,7 @@
                     <canvas id="canvas"></canvas>
                 </div>
             </div>
-            <!-- Option: Upload -->
+            <!-- Option: Upload (hidden atm) -->
             <div id="upload-input" class="tabcontent">
                 <div class="upload-img">
                     <div class="img-placeholder-wrapper">
@@ -89,71 +89,10 @@
                 </div>
             </div>
         </div>
-    <!-- COOPER -->
-        <div class="museum-column">
-            <div class="header">
-                <div class="museum-title">The Met</div>
-            </div>
-            <div class="img-box">
-                <div id="cooper_lazy" class="lazyload">
-                    <div class="spinner-1"></div> 
-                </div>
-                <div id="cooper_error" class="error-sign">
-                    <div class="error-content-wrapper">
-                        <div class="error-sign-wrapper">
-                            <i class="material-icons error">close</i>
-                        </div>
-                        <div class="error-message-wrapper">
-                            <p>Error displaying the image. Please try another drawing.</p>
-                        </div>
-                    </div>
-                </div>
-              <div id="cooper_img_1" class="match-img">
-                </div>
-            </div>
-            <div class="info-box">
-                <div class="tags_wrapper" lang="de">
-                    <div id="cooper_query_title" class="query-title">
-                        
-                    </div>
-                    <div></div>
-                    <div id="cooper_img_title" class="img-title" lang="de"></div>
-                    <div id="cooper_query_tag_body_1" class="tag tag-body"></div>
-                    <div id="cooper_query_tag_pred_1" class="tag"></div>
-                    <div></div>
-                    <div id="cooper_match_tag_body_1" class="tag tag-body"></div>
-                    <div id="cooper_match_tag_pred_1" class="tag"></div>
-
-                    <div id="cooper_query_tag_body_2" class="tag tag-body"></div>
-                    <div id="cooper_query_tag_pred_2" class="tag"></div>
-                    <div></div>
-                    <div id="cooper_match_tag_body_2" class="tag tag-body"></div>
-                    <div id="cooper_match_tag_pred_2" class="tag"></div>
-
-                    <div id="cooper_query_tag_body_3" class="tag tag-body"></div>
-                    <div id="cooper_query_tag_pred_3" class="tag"></div>
-                    <div></div>
-                    <div id="cooper_match_tag_body_3" class="tag tag-body"></div>
-                    <div id="cooper_match_tag_pred_3" class="tag"></div>
-
-                    <div id="cooper_query_tag_body_4" class="tag tag-body"></div>
-                    <div id="cooper_query_tag_pred_4" class="tag"></div>
-                    <div></div>
-                    <div id="cooper_match_tag_body_4" class="tag tag-body"></div>
-                    <div id="cooper_match_tag_pred_4" class="tag"></div>
-
-                    <div id="cooper_query_tag_body_5" class="tag tag-body"></div>
-                    <div id="cooper_query_tag_pred_5" class="tag"></div>
-                    <div></div>
-                    <div id="cooper_match_tag_body_5" class="tag tag-body"></div>
-                    <div id="cooper_match_tag_pred_5" class="tag"></div>
-                </div>
-            </div>
-        </div>
     <!-- MET -->
         <div class="museum-column">
             <div class="header">
-                <div class="museum-title">Tate</div>
+                <div class="museum-title">The Met</div>
             </div>
             <div class="img-box">
                 <div id="met_lazy" class="lazyload">
@@ -169,15 +108,16 @@
                         </div>
                     </div>
                 </div>
-                <div id="met_img_1" class="match-img">
+              <div id="met_img_1" class="match-img">
                 </div>
             </div>
             <div class="info-box">
                 <div class="tags_wrapper" lang="de">
-                    <div id="met_query_title" class="query-title"></div>
+                    <div id="met_query_title" class="query-title">
+                        
+                    </div>
                     <div></div>
                     <div id="met_img_title" class="img-title" lang="de"></div>
-
                     <div id="met_query_tag_body_1" class="tag tag-body"></div>
                     <div id="met_query_tag_pred_1" class="tag"></div>
                     <div></div>
@@ -210,16 +150,16 @@
                 </div>
             </div>
         </div>
-    <!-- SCIENCE MUSEUM -->
+    <!-- TATE -->
         <div class="museum-column">
             <div class="header">
-                <div class="museum-title">Cooper Hewitt</div>
+                <div class="museum-title">Tate</div>
             </div>
             <div class="img-box">
-                <div id="smg_lazy" class="lazyload">
+                <div id="tate_lazy" class="lazyload">
                     <div class="spinner-1"></div> 
                 </div>
-                <div id="smg_error" class="error-sign">
+                <div id="tate_error" class="error-sign">
                     <div class="error-content-wrapper">
                         <div class="error-sign-wrapper">
                             <i class="material-icons error">close</i>
@@ -229,44 +169,104 @@
                         </div>
                     </div>
                 </div>
-                <div id="smg_img_1" class="match-img">
+                <div id="tate_img_1" class="match-img">
                 </div>
             </div>
             <div class="info-box">
                 <div class="tags_wrapper" lang="de">
-                    <div id="smg_query_title" class="query-title"></div>
+                    <div id="tate_query_title" class="query-title"></div>
                     <div></div>
-                    <div id="smg_img_title" class="img-title" lang="de"></div>
+                    <div id="tate_img_title" class="img-title" lang="de"></div>
 
-                    <div id="smg_query_tag_body_1" class="tag tag-body"></div>
-                    <div id="smg_query_tag_pred_1" class="tag"></div>
+                    <div id="tate_query_tag_body_1" class="tag tag-body"></div>
+                    <div id="tate_query_tag_pred_1" class="tag"></div>
                     <div></div>
-                    <div id="smg_match_tag_body_1" class="tag tag-body"></div>
-                    <div id="smg_match_tag_pred_1" class="tag"></div>
+                    <div id="tate_match_tag_body_1" class="tag tag-body"></div>
+                    <div id="tate_match_tag_pred_1" class="tag"></div>
 
-                    <div id="smg_query_tag_body_2" class="tag tag-body"></div>
-                    <div id="smg_query_tag_pred_2" class="tag"></div>
+                    <div id="tate_query_tag_body_2" class="tag tag-body"></div>
+                    <div id="tate_query_tag_pred_2" class="tag"></div>
                     <div></div>
-                    <div id="smg_match_tag_body_2" class="tag tag-body"></div>
-                    <div id="smg_match_tag_pred_2" class="tag"></div>
+                    <div id="tate_match_tag_body_2" class="tag tag-body"></div>
+                    <div id="tate_match_tag_pred_2" class="tag"></div>
 
-                    <div id="smg_query_tag_body_3" class="tag tag-body"></div>
-                    <div id="smg_query_tag_pred_3" class="tag"></div>
+                    <div id="tate_query_tag_body_3" class="tag tag-body"></div>
+                    <div id="tate_query_tag_pred_3" class="tag"></div>
                     <div></div>
-                    <div id="smg_match_tag_body_3" class="tag tag-body"></div>
-                    <div id="smg_match_tag_pred_3" class="tag"></div>
+                    <div id="tate_match_tag_body_3" class="tag tag-body"></div>
+                    <div id="tate_match_tag_pred_3" class="tag"></div>
 
-                    <div id="smg_query_tag_body_4" class="tag tag-body"></div>
-                    <div id="smg_query_tag_pred_4" class="tag"></div>
+                    <div id="tate_query_tag_body_4" class="tag tag-body"></div>
+                    <div id="tate_query_tag_pred_4" class="tag"></div>
                     <div></div>
-                    <div id="smg_match_tag_body_4" class="tag tag-body"></div>
-                    <div id="smg_match_tag_pred_4" class="tag"></div>
+                    <div id="tate_match_tag_body_4" class="tag tag-body"></div>
+                    <div id="tate_match_tag_pred_4" class="tag"></div>
 
-                    <div id="smg_query_tag_body_5" class="tag tag-body"></div>
-                    <div id="smg_query_tag_pred_5" class="tag"></div>
+                    <div id="tate_query_tag_body_5" class="tag tag-body"></div>
+                    <div id="tate_query_tag_pred_5" class="tag"></div>
                     <div></div>
-                    <div id="smg_match_tag_body_5" class="tag tag-body"></div>
-                    <div id="smg_match_tag_pred_5" class="tag"></div>
+                    <div id="tate_match_tag_body_5" class="tag tag-body"></div>
+                    <div id="tate_match_tag_pred_5" class="tag"></div>
+                </div>
+            </div>
+        </div>
+    <!-- COOPER -->
+        <div class="museum-column">
+            <div class="header">
+                <div class="museum-title">Cooper Hewitt</div>
+            </div>
+            <div class="img-box">
+                <div id="cooper_lazy" class="lazyload">
+                    <div class="spinner-1"></div> 
+                </div>
+                <div id="cooper_error" class="error-sign">
+                    <div class="error-content-wrapper">
+                        <div class="error-sign-wrapper">
+                            <i class="material-icons error">close</i>
+                        </div>
+                        <div class="error-message-wrapper">
+                            <p>Error displaying the image. Please try another drawing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="cooper_img_1" class="match-img">
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="tags_wrapper" lang="de">
+                    <div id="cooper_query_title" class="query-title"></div>
+                    <div></div>
+                    <div id="cooper_img_title" class="img-title" lang="de"></div>
+
+                    <div id="cooper_query_tag_body_1" class="tag tag-body"></div>
+                    <div id="cooper_query_tag_pred_1" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_1" class="tag tag-body"></div>
+                    <div id="cooper_match_tag_pred_1" class="tag"></div>
+
+                    <div id="cooper_query_tag_body_2" class="tag tag-body"></div>
+                    <div id="cooper_query_tag_pred_2" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_2" class="tag tag-body"></div>
+                    <div id="cooper_match_tag_pred_2" class="tag"></div>
+
+                    <div id="cooper_query_tag_body_3" class="tag tag-body"></div>
+                    <div id="cooper_query_tag_pred_3" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_3" class="tag tag-body"></div>
+                    <div id="cooper_match_tag_pred_3" class="tag"></div>
+
+                    <div id="cooper_query_tag_body_4" class="tag tag-body"></div>
+                    <div id="cooper_query_tag_pred_4" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_4" class="tag tag-body"></div>
+                    <div id="cooper_match_tag_pred_4" class="tag"></div>
+
+                    <div id="cooper_query_tag_body_5" class="tag tag-body"></div>
+                    <div id="cooper_query_tag_pred_5" class="tag"></div>
+                    <div></div>
+                    <div id="cooper_match_tag_body_5" class="tag tag-body"></div>
+                    <div id="cooper_match_tag_pred_5" class="tag"></div>
                 </div>
             </div>
         </div>

@@ -149,7 +149,7 @@ def get_matches(image, museum_data=museum_data, results_count=9, csvUpload=True)
         
         #2. Get query tag feature and compare against collection tag features
         
-        #not normalised for display
+        #get feature embeddings 
         query_tag_softmax = (100.0 * query_img_feature @ text_features.T).softmax(dim=-1)
         #normalise for to calculate matches (step one done again to not alter the previous variable)
         # query_tag_feature = (100.0 * query_img_feature @ text_features.T).softmax(dim=-1)
