@@ -15,7 +15,7 @@ from io import BytesIO
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load('ViT-B/32', device)
 
-#Load tags lists (SMG collection v2, Met tags list v2)
+#Load tags lists 
 df_cooper = pd.read_csv("data/final/cooper/cooper-hewitt_tags.csv")
 cooper_tags = df_cooper['tags'].tolist()
 
@@ -29,9 +29,7 @@ df_tate = pd.read_csv('data/final/tate/tate-subject-terms.csv')
 tate_tags = df_tate['term'].tolist()
 
 #Load ID lookup lists -> no duplicates
-# cooper_id = np.load("data/final/cooper/cooper-hewitt_id-list_unique.npy", allow_pickle=True)
 cooper_id = np.load("data/final/cooper/cooper_id_list_2024.npy")
-# met_id = np.load("data/final/met/met_image-feature-id-list_unique.npy")
 met_id = np.load("data/final/met/met_id_list_2024.npy")
 science_id = np.load("data/final/smg/science-museum_feature-id-list_2_unique.npy")
 tate_id = np.load('data/final/tate/tate_image-id-list.npy')
@@ -54,9 +52,7 @@ science_text_features = torch.from_numpy(science_text_features).to(device)
 tate_text_features = torch.from_numpy(tate_text_features).to(device)
 
 #Load image features -> no duplicates
-# cooper_img_features = np.load("data/final/cooper/cooper_image-features_unique.npy")
 cooper_img_features = np.load("data/final/cooper/cooper_image_features_2024.npy")
-# met_img_features = np.load("data/final/met/met_image-features_unique.npy")
 met_img_features = np.load("data/final/met/met_image_features_2024.npy")
 science_img_features = np.load("data/final/smg/science-museum_image-features_2_unique.npy")
 tate_img_features = np.load("data/final/tate/tate_image-features.npy")
@@ -86,14 +82,6 @@ tate_tag_features = (100.0 * tate_img_features @ tate_text_features.T).softmax(d
 tate_tag_features /= tate_tag_features.norm(dim=-1, keepdim=True)
 
 #Put it all into dict to loop through
-# museum_data = {"cooper": [cooper_tag_features, cooper_tag_softmax, cooper_text_features, cooper_tags, cooper_id],
-#                "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id],
-#                "science": [science_tag_features, science_tag_softmax, science_text_features, science_tags, science_id]}
-
-# museum_data = {"tate": [tate_tag_features, tate_tag_softmax, tate_text_features, tate_tags, tate_id],
-#                "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id],
-#                "science": [science_tag_features, science_tag_softmax, science_text_features, science_tags, science_id]}
-
 museum_data = {"tate": [tate_tag_features, tate_tag_softmax, tate_text_features, tate_tags, tate_id, tate_image_links],
                "met": [met_tag_features, met_tag_softmax, met_text_features, met_tags, met_id, met_image_links],
                "cooper": [cooper_tag_features, cooper_tag_softmax, cooper_text_features, cooper_tags, cooper_id, cooper_image_links]}
@@ -128,8 +116,6 @@ def predict_query(image):
 def get_matches(image, museum_data=museum_data, results_count=9, csvUpload=True):
 
     #Setup dictionary -> will be JSON response that is sent back to client   
-    # result = {"cooper": {}, "met": {}, "science": {}}
-    # result = {"tate": {}, "met": {}, "science": {}}
     result = {"tate": {}, "met": {}, "cooper": {}}
 
      
@@ -151,12 +137,8 @@ def get_matches(image, museum_data=museum_data, results_count=9, csvUpload=True)
         
         #get feature embeddings 
         query_tag_softmax = (100.0 * query_img_feature @ text_features.T).softmax(dim=-1)
-        #normalise for to calculate matches (step one done again to not alter the previous variable)
-        # query_tag_feature = (100.0 * query_img_feature @ text_features.T).softmax(dim=-1)
-        # query_tag_feature /= query_tag_feature.norm(dim=-1, keepdim=True)
         
         #Get cosine similarity scores
-        # similarities = (tag_features @ query_tag_feature.T).squeeze(1)
         similarities = (tag_softmax @ query_tag_softmax.T).squeeze(1)
 
         #Sort photos by similarity scores (top n -> e.g. top n to account for errors)
