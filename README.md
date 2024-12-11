@@ -5,6 +5,7 @@ Sketchy Collections is a CLIP-based image search tool that makes it possible to 
 In the app, you can see the five top terms for both the sketch and the matching images. Each museum has its own vocabulary, some of which are tags made for the public or terms used for cataloguing the museum objects. When comparing the images and tags across different museums, we can see how the AI model sees images and how it describes them given different “languages” of museums. All of this is shaped by different factors: What was the model trained on initially? What objects are included in the museums? How do museums talk about their collections?
 
 Demo: http://134.209.182.231:8000/
+Paper: https://bit.ly/49wk1GU
 
 ## Setup
 
